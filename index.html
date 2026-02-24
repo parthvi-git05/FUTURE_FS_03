@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saffron & Spice | Authentic Indian Kitchen</title>
+    <style>
+        :root {
+            --pastel-orange: #fff7ed;
+            --marigold: #ffb347;
+            --turmeric: #f97316;
+            --burnt-sienna: #ea580c;
+            --deep-clay: #7c2d12;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--pastel-orange); 
+            color: var(--deep-clay); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Scroll Reveal Classes --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 8%; background: var(--white);
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(234, 88, 12, 0.1);
+        }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--burnt-sienna); }
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links a { 
+            text-decoration: none; color: var(--deep-clay); 
+            font-weight: 600; font-size: 0.9rem; transition: 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; width: 0; height: 2px; background: var(--turmeric);
+            position: absolute; bottom: -5px; left: 0; transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Hero: Top Rated */
+        #home { 
+            padding: 80px 10%;
+            text-align: center; 
+            background: linear-gradient(rgba(255,247,237,0.85), rgba(255,247,237,0.85)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1500'); 
+            background-size: cover; 
+            min-height: 80vh;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+
+        .top-rated-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
+        
+        .rating-card { 
+            background: var(--white); padding: 30px; border-radius: 20px; 
+            border-bottom: 5px solid var(--marigold); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+            transition: var(--transition);
+        }
+        .rating-card:hover { transform: translateY(-10px); border-color: var(--burnt-sienna); }
+        .stars { color: #fbbf24; margin-bottom: 10px; font-size: 1.2rem; }
+
+        /* Menu Section */
+        #menu { padding: 80px 10%; background: var(--white); }
+        .menu-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .menu-category h3 { border-bottom: 2px solid var(--marigold); margin-bottom: 25px; padding-bottom: 8px; color: var(--burnt-sienna); }
+        
+        .menu-item { 
+            display: flex; justify-content: space-between; 
+            margin-bottom: 15px; padding: 10px;
+            border-radius: 8px; transition: 0.3s;
+        }
+        .menu-item:hover { background: var(--pastel-orange); padding-left: 15px; }
+        .item-price { font-weight: bold; color: var(--burnt-sienna); }
+
+        /* Takeout Section */
+        #takeout { padding: 80px 10%; text-align: center; }
+        .order-box { 
+            background: var(--white); color: var(--deep-clay); 
+            padding: 60px 40px; border-radius: 30px; 
+            max-width: 700px; margin: 0 auto;
+            border: 2px solid var(--marigold);
+            box-shadow: 0 20px 40px rgba(234, 88, 12, 0.1);
+        }
+        .btn-order { 
+            background: var(--burnt-sienna); color: white; 
+            padding: 18px 45px; border: none; border-radius: 50px; 
+            font-weight: bold; cursor: pointer; transition: 0.3s; 
+            font-size: 1.1rem; box-shadow: 0 10px 20px rgba(234, 88, 12, 0.3);
+        }
+        .btn-order:hover { transform: scale(1.05); background: var(--deep-clay); box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+
+        /* About Section */
+        #about { padding: 80px 10%; text-align: center; max-width: 900px; margin: 0 auto; }
+        .year-badge { background: var(--turmeric); color: white; padding: 6px 20px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+
+        /* Contact & Reviews */
+        #contact-reviews { padding: 80px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: var(--white); }
+        input, textarea, select { 
+            width: 100%; padding: 14px; margin-bottom: 15px;
+            border: 1px solid var(--marigold); border-radius: 12px; outline: none; 
+            transition: 0.3s; background: var(--pastel-orange);
+        }
+        input:focus, textarea:focus { border-color: var(--burnt-sienna); background: white; }
+        
+        footer { background: var(--deep-clay); color: white; text-align: center; padding: 40px; }
+
+        @media (max-width: 768px) { #contact-reviews { grid-template-columns: 1fr; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🥘 SAFFRON & SPICE</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#takeout">Takeout</a></li>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#contact-reviews">Reviews</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <div class="reveal">
+            <h2 style="font-size: 3rem; margin-bottom: 10px;">The Most Rated Flavors</h2>
+            <p>Voted by 5,000+ local foodies in 2026.</p>
+        </div>
+        <div class="top-rated-grid">
+            <div class="rating-card reveal">
+                <div class="stars">★★★★★</div>
+                <h4>Butter Chicken Special</h4>
+                <p>Silky tomato gravy with charcoal-grilled chicken tikka.</p>
+            </div>
+            <div class="rating-card reveal">
+                <div class="stars">★★★★★</div>
+                <h4>Dum Biryani</h4>
+                <p>Long-grain basmati slow-cooked for 6 hours with 12 secret spices.</p>
+            </div>
+            <div class="rating-card reveal">
+                <div class="stars">★★★★★</div>
+                <h4>Dal Makhani</h4>
+                <p>Black lentils simmered overnight on a slow charcoal fire.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px;" class="reveal">The Grand Menu</h2>
+        <div class="menu-wrapper">
+            <div class="menu-category reveal">
+                <h3>Starters</h3>
+                <div class="menu-item"><span>Paneer Tikka (6pc)</span><span class="item-price">₹280</span></div>
+                <div class="menu-item"><span>Chicken Seekh Kebab</span><span class="item-price">₹320</span></div>
+                <div class="menu-item"><span>Hara Bhara Kabab</span><span class="item-price">₹240</span></div>
+                <div class="menu-item"><span>Fish Amritsari</span><span class="item-price">₹380</span></div>
+                <div class="menu-item"><span>Crispy Corn</span><span class="item-price">₹210</span></div>
+            </div>
+            <div class="menu-category reveal">
+                <h3>Main Course</h3>
+                <div class="menu-item"><span>Shahi Paneer</span><span class="item-price">₹340</span></div>
+                <div class="menu-item"><span>Kadai Chicken</span><span class="item-price">₹420</span></div>
+                <div class="menu-item"><span>Mutton Rogan Josh</span><span class="item-price">₹550</span></div>
+                <div class="menu-item"><span>Malai Kofta</span><span class="item-price">₹310</span></div>
+                <div class="menu-item"><span>Mix Veg Jhalfrezi</span><span class="item-price">₹260</span></div>
+            </div>
+            <div class="menu-category reveal">
+                <h3>Breads & Rice</h3>
+                <div class="menu-item"><span>Butter Naan</span><span class="item-price">₹60</span></div>
+                <div class="menu-item"><span>Garlic Naan</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span>Jeera Rice</span><span class="item-price">₹180</span></div>
+                <div class="menu-item"><span>Tandoori Roti</span><span class="item-price">₹25</span></div>
+                <div class="menu-item"><span>Laccha Paratha</span><span class="item-price">₹70</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="takeout">
+        <div class="order-box reveal">
+            <h2 style="font-size: 2rem; margin-bottom: 15px;">Order Takeout Online</h2>
+            <p style="margin-bottom: 30px;">Get 20% OFF on your first order via our website.</p>
+            <button class="btn-order" onclick="alert('Redirecting to secure ordering portal...')">Order Now</button>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <span class="year-badge">EST. 2023</span>
+        <h2 style="margin: 25px 0; font-size: 2.5rem; color: var(--burnt-sienna);">Our Saffron Legacy</h2>
+        <p>Founded in 2023, Saffron & Spice was born from a passion for lost recipes. We use only hand-pounded spices and organic oils to recreate the magic of royal Indian kitchens. Every meal here is a celebration of heritage.</p>
+    </section>
+
+    <section id="contact-reviews">
+        <div class="contact-form reveal">
+            <h3 style="margin-bottom: 20px;">Contact Us</h3>
+            <form id="contactForm">
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea rows="4" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn-order" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+        <div class="reviews reveal">
+            <h3 style="margin-bottom: 20px;">Customer Reviews</h3>
+            <div id="reviewDisplay" style="background: var(--pastel-orange); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+                <p><em>"The Garlic Naan is so soft and the Butter Chicken is legendary. Highly recommended for family dinners!" - Ananya K.</em></p>
+            </div>
+            <textarea id="userComment" placeholder="Write your review..."></textarea>
+            <button type="button" onclick="submitReview()" class="btn-order" style="width: 100%; padding: 12px; font-size: 0.9rem;">Post Review</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Saffron & Spice Indian Kitchen | Jaipur, India</p>
+    </footer>
+
+    <script>
+        // --- Scroll Reveal JavaScript ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal; // Trigger once on load
+
+        function submitReview() {
+            const comment = document.getElementById('userComment').value;
+            if(comment) {
+                alert("Thank you! Your review is pending approval.");
+                document.getElementById('userComment').value = "";
+            }
+        }
+    </script>
+</body>
+</html>
